@@ -1,0 +1,186 @@
+<html>
+<head>
+<style>
+.i{
+background-color:green;
+
+}
+</style>
+<title>
+</title>
+</head>
+<body>
+<h1>Learn The English Letters</h1>
+ Number of Letters ::<input type="number" id="a"  min=1 max=26> <input type="button" id="bot"  value="Generate" class="i"><br><br>
+
+ <div id="di">
+ </div>
+<img src=" " name="pict"  id="pic" >
+<script src="jquery3.2.1.min.js"></script>
+<script>
+var x=document.getElementById('bot');
+var x1=document.getElementById('di');
+//var x2=document.getElementById('pr');
+ch=["A","B","C","D","E","F","G","H","I","J","k","L","M","N","O","P","Q","R","S","T","u","V","W","X","Y","Z"];
+ima=["1.PNG","2.PNG","3.PNG","4.PNG","5.PNG","6.PNG","8.PNG","9.PNG","10.PNG","11.PNG","12.PNG","13.PNG","14.PNG","16.PNG","17.PNG","18.PNG","19.PNG","20.PNG","21.PNG","22.PNG","23.PNG","24.PNG","25.PNG","26.PNG","27.PNG","28.PNG"];           
+          //  var num_genr=0;
+           // var num_load=0;
+           // var num_unload=0;
+            //var nu_genr=0;
+function randomnumber(min, max) {
+        var rand = Math.floor(Math.random() * (max - min + 1) + min);
+        return rand;
+	}
+ 
+x.addEventListener("click",function (e){
+var y=document.getElementById('a').value;
+getn(y);
+var $arr2=[];
+ //x.addEventListener("click",function(e){
+ //num_load=num_load+1;
+ var str=new stor(e.target,e.type,e.date=new Date);
+  if(localStorage.key!="generate")
+  {
+              $arr2.push(str);
+             localStorage.setItem("generate",JSON.stringify($arr2));
+			 }
+             else
+             {
+             // arr=JSON.parse(localStorage.getItem("load"));
+              $arr2=JSON.parse(localStorage.getItem("generate"));
+             $arr2.push(str);
+               localStorage.setItem("generate",JSON.stringify($arr2));
+             }
+			 
+			 
+			 //console.log(num_load+"  number of load");
+ 
+
+
+});
+
+
+function getn(y)
+{ 
+//document.getElementById("pic").style.display = "";
+x1.textContent="";
+document.images[0].src="";
+for(let i=0;i<y;i++)
+{ 
+var r=randomnumber(0, 25);
+x1.innerHTML+=("<input type=button class='s' value='"+ch[r]+"' onclick='disp("+r+")' />  ");
+}
+
+}
+
+function disp(a){
+ document.images[0].src=ima[a];
+   nu_genr=nu_genr+1;
+console.log(nu_genr+"  number of   generate");
+ }
+ 
+function stor(target,type,date){
+this.target=target;
+this.type=type;
+this.date=date;
+
+}
+
+
+
+
+
+
+
+        var $arr=[];
+ window.addEventListener("load",function(e){
+ //num_load=num_load+1;
+ var s=new stor(e.target,e.type,e.date=new Date);
+  if(localStorage.key!="load")
+  {
+              $arr.push(s);
+             localStorage.setItem("load",JSON.stringify($arr));
+			 }
+             else
+             {
+             // arr=JSON.parse(localStorage.getItem("load"));
+              $arr=JSON.parse(localStorage.getItem("load"));
+             $arr.push(s);
+               localStorage.setItem("load",JSON.stringify($arr));
+             }
+			 
+			 
+			 //console.log(num_load+"  number of load");
+ });
+       
+ var $arr2=[];
+ window.addEventListener("unload",function(e){
+ //num_load=num_load+1;
+ var s2=new stor(e.target,e.type,e.date=new Date);
+  if(localStorage.key!="unload")
+  {
+              $arr2.push(s2);
+             localStorage.setItem("unload",JSON.stringify($arr2));
+			 }
+             else
+             {
+             // arr=JSON.parse(localStorage.getItem("load"));
+              $arr2=JSON.parse(localStorage.getItem("unload"));
+             $arr2.push(s2);
+               localStorage.setItem("unload",JSON.stringify($arr2));
+             }
+			 
+			 
+			 //console.log(num_load+"  number of load");
+ });
+ 
+ 
+
+  var $ar1=[];
+ $ar1=JSON.parse(localStorage.getItem("load"));
+ var $ar2=[];
+ $ar2=JSON.parse(localStorage["unload"]);
+ //var $ar3=[];
+ //$ar3=JSON.parse(localStorage["generate"]);
+ function st()
+ {
+ $.ajax({
+     "type": "POST",
+      "url": "progect.php",
+     "data":{
+	 "load":JSON.stringify($ar1),
+	 "unload":JSON.stringify($ar2)
+	// "generate":JSON.stringify($ar3)
+	 },
+      "success": function(response){
+    console.log(response);
+	
+    }
+  });
+  localStorage.clear();
+  }
+  setInterval(st,5000);
+ 
+$.ajax({
+     "type": "GET",
+      "url": "progect.php",
+      "data": {"tar": "" },
+      "success": function(response){
+  console.log(response);
+	//localStorage.clear();
+	
+	}
+      
+  }); 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  </script>
+</body>
+</html>
